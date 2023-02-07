@@ -21,11 +21,22 @@ export async function id(ctx) {
     }
 }
 
-export async function name(ctv) {
+export async function name(ctx) {
     try {
         const merchant = await merchantModel.find({name})
         ctx.ok(merchant)
     } catch (e) {
-        ctv.badRequest({message: e.message})
+        ctx.badRequest({message: e.message})
     }
+}
+
+export async function logo(ctx) {
+    try {
+        const merchant = await merchantModel.find({logo})
+        ctx.ok(merchant)
+    } catch (e) {
+        ctx.badRequest({message : e.message})
+    }
+
+
 }
