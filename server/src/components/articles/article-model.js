@@ -26,14 +26,14 @@ const articlesSchema = new Schema({
   },
   merchant: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
     ref: 'Merchant'
   },
-  // category: {
-  //   type: Schema.Types.ObjectId,
-  //   required: false,
-  //   ref: 'Category'
-  // }{
+  category: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Category'
+  }
 }, {
   timestamps: true
 })
