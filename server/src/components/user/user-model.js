@@ -1,8 +1,5 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
-// import { customAlphabet } from 'nanoid'
-// import nanoidDictionary from 'nanoid-dictionary'
-// const { numbers } = nanoidDictionary;
 const { Schema } = mongoose
 
 const userSchema = new Schema({
@@ -39,18 +36,14 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  // settings: {
-  //   validation_email_token: String
-  // }
+  role: {
+    type: String,
+  }
 }, {
   timestamps: true
 })
 
 userSchema.method({
-  // generateEmailVerificationToken() {
-  //   const token = customAlphabet(numbers, 5)();
-  //   this.settings.validation_email_token = token;
-  // },
   generateJWT() {
     const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
       issuer: process.env.APP_NAME,

@@ -4,7 +4,8 @@ import * as UserControllers from '../user/user-controllers.js'
 
 const users = new Router()
 
-users.post('/register', UserControllers.register)
+users.post('/register', UserControllers.registerClient)
+users.post('/registerMerchant', UserControllers.registerMerchant)
 users.post('/login', UserControllers.login)
 users.get('/', UserControllers.index)
 users.get('/:id', UserControllers.id)
