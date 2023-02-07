@@ -1,4 +1,4 @@
-import UserModel from '#components/user/user-model.js'
+import UserModel from './user-model.js'
 import Joi from 'joi'
 import argon2, { hash } from 'argon2'
 

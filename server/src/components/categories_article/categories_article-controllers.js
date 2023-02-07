@@ -1,4 +1,4 @@
-import categoriesArticleModel from '#components/categories_article/categories_article-model.js'
+import categoriesArticleModel from './categories_article-model.js'
 
 
 export async function index(ctx) {

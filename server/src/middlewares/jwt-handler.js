@@ -1,5 +1,5 @@
 import koaJWT from 'koa-jwt'
-import UserModel from '#components/user/user-model.js'
+import UserModel from '../components/user/user-model.js'
 import compose from 'koa-compose'
 
 export const isAuthenticated = koaJWT({

@@ -1,5 +1,5 @@
 import Router from '@koa/router'
-import userRoutes from '#components/user/user-routes.js'
+import userRoutes from '../components/user/user-routes.js'
 import categoriesArticle from '../components/categories_article/categories_article-routes.js'
 
 const API_V1_ROUTER = new Router({ prefix: '/api/v1' })
