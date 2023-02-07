@@ -88,42 +88,42 @@ export async function login(ctx) {
   }
 }
 
-export async function profile(ctx) {
-  try {
+// export async function profile(ctx) {
+//   try {
 
-    console.log(ctx.state.user)
-    ctx.ok(ctx.state.user)
+//     console.log(ctx.state.user)
+//     ctx.ok(ctx.state.user)
 
-  } catch (e) {
-    ctx.badRequest({ message: e.message })
-  }
-}
+//   } catch (e) {
+//     ctx.badRequest({ message: e.message })
+//   }
+// }
 
-export async function profileUpdate(ctx) {
-  try {
-    const profileValidationSchema = Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().min(6).required()
-    })
+// export async function profileUpdate(ctx) {
+//   try {
+//     const profileValidationSchema = Joi.object({
+//       email: Joi.string().email().required(),
+//       password: Joi.string().min(6).required()
+//     })
 
-    if (!ctx.state.user.id) throw new Error('No id supplied')
-    const { error, value } = profileValidationSchema.validate(ctx.request.body)
-    if (error) throw new Error(error)
+//     if (!ctx.state.user.id) throw new Error('No id supplied')
+//     const { error, value } = profileValidationSchema.validate(ctx.request.body)
+//     if (error) throw new Error(error)
 
-    const hashedPassword = await argon2.hash(value.password)
-    const updatedUserProfile = await UserModel.findByIdAndUpdate(ctx.state.user.id, { ...value, password: hashedPassword }, { runValidators: true, new: true })
+//     const hashedPassword = await argon2.hash(value.password)
+//     const updatedUserProfile = await UserModel.findByIdAndUpdate(ctx.state.user.id, { ...value, password: hashedPassword }, { runValidators: true, new: true })
 
-    console.log(hashedPassword)
+//     console.log(hashedPassword)
 
-    //On sauvegarde dans la base de données
-    await updatedUserProfile.save()
+//     //On sauvegarde dans la base de données
+//     await updatedUserProfile.save()
 
-    ctx.ok(updatedUserProfile)
-    console.log("profile updated")
+//     ctx.ok(updatedUserProfile)
+//     console.log("profile updated")
 
-  } catch (e) {
-    console.log("not working")
-    ctx.badRequest({ message: e.message })
-  }
-}
+//   } catch (e) {
+//     console.log("not working")
+//     ctx.badRequest({ message: e.message })
+//   }
+// }
 

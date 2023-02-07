@@ -1,27 +1,33 @@
 import mongoose from 'mongoose'
-import { customAlphabet  } from 'nanoid'
-import nanoidDictionary from 'nanoid-dictionary'
-import jwt from 'jsonwebtoken'
-const { numbers } = nanoidDictionary
 const { Schema } = mongoose
 
 
-
 const merchantsSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        select: false
-    },
-    logo: {
-        type: String,
-        default: false
-    }
-  }, {
-    timestamps: true
-  })
+  name: {
+    type: String,
+    required: true,
+    select: false
+  },
+  logo: {
+    type: String,
+    required: true,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    ref: 'User'
+  }
+}, {
+  timestamps: true
+})
+
+merchantsSchema.static({
+  findByUserId(userId) {
+    return this.find({ user: userId })
+  },
+})
 
 
-const Merchant = mongoose.model('Merchant', merchantsSchema)
+const MerchantModel = mongoose.model('Merchant', merchantsSchema)
 
-export default Merchant
+export default MerchantModel

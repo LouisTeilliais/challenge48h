@@ -19,8 +19,8 @@ export async function create(ctx) {
       description: Joi.string().required(),
       article_stock: Joi.number().required(),
       article_price: Joi.number().precision(2).required(),
-      article_picture: Joi.string().required()
-      // merchant: Joi().string().required(),
+      article_picture: Joi.string().required(),
+      merchant: Joi().string().required(),
       // category: Joi().string().required()
     })
     const { error, value } = articleValidationSchema.validate(ctx.request.body)

@@ -24,11 +24,11 @@ const articlesSchema = new Schema({
     type: String,
     required: true,
   },
-  // merchant: {
-  //   type: Schema.Types.ObjectId,
-  //   required: false,
-  //   ref: 'Merchant'
-  // },
+  merchant: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    ref: 'Merchant'
+  },
   // category: {
   //   type: Schema.Types.ObjectId,
   //   required: false,
@@ -37,6 +37,7 @@ const articlesSchema = new Schema({
 }, {
   timestamps: true
 })
+
 
 const ArticleModel = mongoose.model('Article', articlesSchema)
 
