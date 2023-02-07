@@ -2,7 +2,7 @@ import Router from '@koa/router'
 import userRoutes from '../components/user/user-routes.js'
 import articleRoutes from '../components/articles/article-routes.js'
 import merchantRoutes from '../components/merchants/merchant-routes.js'
-import categoryRoutes from '../components/categories/categories-routes.js'
+import categoryRoutes from '../components/categories/category-routes.js'
 
 const API_ROUTER = new Router({ prefix: '/api' })
 

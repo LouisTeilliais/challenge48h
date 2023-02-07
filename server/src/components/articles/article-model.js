@@ -6,23 +6,22 @@ const articlesSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true
   },
   description: {
     type: String,
     required: false,
   },
-  article_stock: {
+  stock: {
     type: Number,
     required: true
   },
-  article_price: {
+  price: {
     type: Schema.Types.Decimal128,
     required: true
   },
-  article_picture: {
+  image: {
     type: String,
-    required: true,
+    required: true
   },
   merchant: {
     type: Schema.Types.ObjectId,
@@ -36,6 +35,12 @@ const articlesSchema = new Schema({
   }
 }, {
   timestamps: true
+})
+
+articlesSchema.static({
+  findByCategory(categoryId) {
+    return this.find({ category: categoryId })
+  },
 })
 
 

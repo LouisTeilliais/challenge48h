@@ -7,5 +7,6 @@ const articles = new Router()
 articles.get('/', ArticleController.index)
 articles.post('/', ArticleController.create)
 articles.delete('/:id', ArticleController.destroy)
+articles.get('/:id', ArticleController.getAllByCategory)
 
 export default articles

@@ -1,4 +1,4 @@
-import CategoryModel from './categories-model.js'
+import CategoryModel from './category-model.js'
 import Joi from 'joi'
 
 

@@ -5,8 +5,7 @@ const { Schema } = mongoose
 const merchantsSchema = new Schema({
   name: {
     type: String,
-    required: true,
-    select: false
+    required: true
   },
   logo: {
     type: String,

@@ -1,5 +1,5 @@
 import Router from '@koa/router'
-import * as categoriesControllers from './categories-controllers.js'
+import * as categoriesControllers from './category-controllers.js'
 
 
 const categories = new Router()

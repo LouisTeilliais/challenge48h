@@ -12,14 +12,24 @@ export async function index(ctx) {
   }
 }
 
+export async function getAllByCategory(ctx) {
+  try {
+    if (!ctx.params.id) throw new Error('No id supplied')
+    const articles = await ArticleModel.findByCategory(ctx.params.id)
+    ctx.ok(articles)
+  } catch (e) {
+    ctx.badRequest({ message: e.message })
+  }
+}
+
 export async function create(ctx) {
   try {
     const articleValidationSchema = Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
-      article_stock: Joi.number().required(),
-      article_price: Joi.number().precision(2).required(),
-      article_picture: Joi.string().required(),
+      price: Joi.number().precision(2).required(),
+      stock: Joi.number().required(),
+      image: Joi.string().required(),
       merchant: Joi.string().required(),
       category: Joi.string().required()
     })
