@@ -34,9 +34,7 @@
   },
   "imports": {
     "#config/*.js": "./src/config/*.js",
-    "#components/*.js": "./src/components/*.js",
     "#routes/*.js": "./src/routes/*.js",
-    "#middlewares/*.js": "./src/middlewares/*.js",
-    "#services/*.js": "./src/services/*.js"
+    "#middlewares/*.js": "./src/middlewares/*.js"
   }
 }

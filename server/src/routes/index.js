@@ -1,10 +1,10 @@
 import Router from '@koa/router'
-import userRoutes from '#components/user/user-routes.js'
+import userRoutes from '../components/user/user-routes.js'
+import articleRoutes from '../components/articles/article-routes.js'
+const API_ROUTER = new Router({ prefix: '/api' })
 
-const API_V1_ROUTER = new Router({ prefix: '/api/v1' })
-// API_V1_ROUTER.use('/tasks', taskRoutes.routes(), taskRoutes.allowedMethods())
-// API_V1_ROUTER.use('/lists', listRoutes.routes(), listRoutes.allowedMethods())
-API_V1_ROUTER.use('/users', userRoutes.routes(), userRoutes.allowedMethods())
-// API_V1_ROUTER.use('/exemples', exempleRoutes.routes(), exempleRoutes.allowedMethods())
+API_ROUTER.use('/users', userRoutes.routes(), userRoutes.allowedMethods())
+API_ROUTER.use('/articles', articleRoutes.routes(), articleRoutes.allowedMethods())
 
-export { API_V1_ROUTER }
+
+export { API_ROUTER }

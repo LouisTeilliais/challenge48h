@@ -1,6 +1,7 @@
-import UserModel from '#components/user/user-model.js'
+import UserModel from './user-model.js'
 import Joi from 'joi'
 import argon2, { hash } from 'argon2'
+
 
 export async function index(ctx) {
   try {
@@ -22,35 +23,35 @@ export async function id(ctx) {
   }
 }
 
+
 export async function register(ctx) {
   try {
     const registerValidationSchema = Joi.object({
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().min(6).required(),
-      terms_and_conditions: Joi.boolean().required(),
-    })
-    const params = ctx.request.body
-    const { error, value } = registerValidationSchema.validate(params)
-    if (error) throw new Error(error)
-    const hashedPassword = await argon2.hash(value.password)
+      adress: Joi.string().required(),
+      phone: Joi.string().required(),
+      // role : 
+    });
+    const params = ctx.request.body;
+    const { error, value } = registerValidationSchema.validate(params);
+    if (error) throw new Error(error);
+    const hashedPassword = await argon2.hash(value.password);
     const newUser = new UserModel({
       ...value,
       password: hashedPassword,
       settings: {
-        terms_and_conditions: value.terms_and_conditions
-      }
-    })
-    newUser.generateEmailVerificationToken()
-    // newUser.generateJWT() 
-    const user = await newUser.save()
-    await sendWelcomeEmail(user, user.settings.validation_email_token)
-    ctx.ok(newUser)
-    console.log(newUser)
+        terms_and_conditions: value.terms_and_conditions,
+      },
+    });
+    const user = await newUser.save();
+    ctx.ok({ user });
   } catch (e) {
-    ctx.badRequest({ message: e.message })
+    ctx.badRequest({ message: e.message });
   }
 }
-
 
 export async function login(ctx) {
   try {
@@ -69,7 +70,6 @@ export async function login(ctx) {
 
     // check le email et le password si l'utilisateur si il existe
     if (userEmail.email == email_login && await argon2.verify(hashPassword.password, password_login)) {
-      console.log("Email exist and password match !")
       ctx.body = "Email and password match"
 
       //Generate un token pour l'utilisateur actuel
@@ -80,7 +80,6 @@ export async function login(ctx) {
       console.log(user)
 
     } else {
-      console.log("Error the email or password is wrong !")
       throw new Error('Error the email or password is wrong !')
     }
 
@@ -102,9 +101,6 @@ export async function profile(ctx) {
 
 export async function profileUpdate(ctx) {
   try {
-
-    // console.log(ctx.state.user.id)
-
     const profileValidationSchema = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().min(6).required()
